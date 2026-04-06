@@ -1,18 +1,34 @@
 package com.br.ufpr.lpoo2.models;
 
-public class Cliente extends Endereco{
-    String nome;
-    String sobrenome;
-    String RG;
-    String Cpf;
-    Endereco endereco;
+public class Cliente implements Comparable<Cliente> {
+    private int id;
+    private String nome, sobrenome, rg, cpf;
+    private Double salario;
+    private Endereco endereco;
 
-    
-
-    public Cliente(String nome, String sobrenome, String rg, String cpf, Number salario) {
+    public Cliente(String nome, String sobrenome, String rg, String cpf, Double salario, Endereco endereco) {
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.rg = rg;
+        this.cpf = cpf;
+        this.salario = salario;
+        this.endereco = endereco;
     }
 
-    public Cliente(String rua, String cep, String complemento, String estado, String pais, int numero) {
+    public Cliente(String nome, String sobrenome, String rg, String cpf, double salario) {
+    }
+
+    @Override
+    public int compareTo(Cliente outro) {
+        return this.nome.compareToIgnoreCase(outro.getNome());
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -31,20 +47,20 @@ public class Cliente extends Endereco{
         this.sobrenome = sobrenome;
     }
 
-    public String getRG() {
-        return RG;
+    public String getRg() {
+        return rg;
     }
 
-    public void setRG(String RG) {
-        this.RG = RG;
+    public void setRg(String rg) {
+        this.rg = rg;
     }
 
     public String getCpf() {
-        return Cpf;
+        return cpf;
     }
 
     public void setCpf(String cpf) {
-        Cpf = cpf;
+        cpf = cpf;
     }
 
     public Endereco getEndereco() {
@@ -53,6 +69,14 @@ public class Cliente extends Endereco{
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public Double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(Double salario) {
+        this.salario = salario;
     }
 
     public Cliente() {

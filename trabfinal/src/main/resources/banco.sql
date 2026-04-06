@@ -22,7 +22,7 @@ idCliente integer references Clientes(id),
 tipo varchar(20),
 deposito_inical numeric,
 limite numeric,
-numero_conta uuid,
+numero_conta int,
 montante_minimo numeric,
 deposito_minimo numeric,
 saldo numeric
