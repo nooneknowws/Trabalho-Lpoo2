@@ -1,4 +1,4 @@
-create table Endereco(
+create table IF NOT EXISTS Endereco(
 id serial PRIMARY KEY,
 rua varchar(255),
 cep varchar(8),
@@ -7,16 +7,16 @@ estado varchar(55),
 pais varchar(55),
 numero integer
 );
-create table Clientes (
+create table IF NOT EXISTS Clientes (
  id serial PRIMARY KEY,
  nome varchar(255),
  sobrenome varchar(255),
  rg varchar(9),
- cpf varchar(11),
+ cpf varchar(11) NOT NULL UNIQUE,
  salario numeric,
  idEndereco integer references Endereco(id)
 );
-create table Contas (
+create table IF NOT EXISTS Contas (
 id serial PRIMARY KEY,
 idCliente integer references Clientes(id),
 tipo varchar(20),

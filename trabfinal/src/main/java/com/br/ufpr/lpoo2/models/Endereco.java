@@ -1,6 +1,7 @@
 package com.br.ufpr.lpoo2.models;
 
 public class Endereco {
+    public int id;
     public String rua;
     public String CEP;
     public String complemento;
@@ -20,6 +21,14 @@ public class Endereco {
         this.numero = numero;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getRua() {
         return rua;
     }
@@ -28,11 +37,11 @@ public class Endereco {
         this.rua = rua;
     }
 
-    public String getCEP() {
+    public String getCep() {
         return CEP;
     }
 
-    public void setCEP(String CEP) {
+    public void setCep(String CEP) {
         this.CEP = CEP;
     }
 

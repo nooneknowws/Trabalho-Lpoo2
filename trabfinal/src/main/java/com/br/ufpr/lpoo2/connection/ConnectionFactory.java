@@ -14,7 +14,7 @@ public class ConnectionFactory {
     static {
         HikariConfig config = new HikariConfig();
 
-        config.setJdbcUrl("jdbc:postgresql://localhost:5432/lpoo2test");
+        config.setJdbcUrl("jdbc:postgresql://localhost:5432/lpoo2final");
         config.setUsername("postgres");
         config.setPassword("admin");
         config.setDriverClassName("org.postgresql.Driver");
@@ -24,7 +24,6 @@ public class ConnectionFactory {
     private ConnectionFactory() {}
 
     public static Connection getConnection() throws SQLException {
-        System.out.println("dbtest");
         return dataSource.getConnection();
 
     }

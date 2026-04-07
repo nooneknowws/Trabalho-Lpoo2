@@ -16,6 +16,11 @@ public class Cliente implements Comparable<Cliente> {
     }
 
     public Cliente(String nome, String sobrenome, String rg, String cpf, double salario) {
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.rg = rg;
+        this.cpf = cpf;
+        this.salario = salario;
     }
 
     @Override
@@ -60,7 +65,7 @@ public class Cliente implements Comparable<Cliente> {
     }
 
     public void setCpf(String cpf) {
-        cpf = cpf;
+        this.cpf = cpf;
     }
 
     public Endereco getEndereco() {
@@ -80,5 +85,10 @@ public class Cliente implements Comparable<Cliente> {
     }
 
     public Cliente() {
+    }
+
+    @Override
+    public String toString() {
+        return nome + " " + sobrenome + " (CPF: " + cpf + ")";
     }
 }

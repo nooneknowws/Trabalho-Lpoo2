@@ -2,32 +2,40 @@ package com.br.ufpr.lpoo2.database;
 
 import com.br.ufpr.lpoo2.connection.ConnectionFactory;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.stream.Collectors;
 
 public class CreateTable {
 
-public static void criaTabelas() throws SQLException {
-    String sqlAutor = "CREATE TABLE IF NOT EXISTS autor ("+
-            "id SERIAL PRIMARY KEY," +
-            "nome varchar(55)" +
-            ");";
-    String sqlLivros = "CREATE TABLE IF NOT EXISTS livros (" +
-            "id SERIAL PRIMARY KEY," +
-            "nome VARCHAR(255) NOT NULL," +
-            "nome_autor integer REFERENCES autor(id)" +
-            ");";
-    try(Connection conn = ConnectionFactory.getConnection();
-        Statement stmt = conn.createStatement()) {
-        stmt.execute(sqlAutor);
-        stmt.execute(sqlLivros);
-    }
-    catch(SQLException e){
-        System.out.println("Erro ao gerar tabelas:" + e.getMessage());
-    }
-    }
+    public static void criaTabelas() {
+        String sql = "";
+        try (InputStream inputStream = CreateTable.class.getClassLoader().getResourceAsStream("banco.sql")) {
+            if (inputStream == null) {
+                throw new IOException("Não foi possível encontrar o arquivo banco.sql");
+            }
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+                sql = reader.lines().collect(Collectors.joining("\n"));
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao ler o arquivo banco.sql: " + e.getMessage());
+            return;
+        }
 
-    public CreateTable() throws SQLException {
+        try (Connection conn = ConnectionFactory.getConnection();
+             Statement stmt = conn.createStatement()) {
+            for (String s : sql.split(";")) {
+                if (!s.trim().isEmpty()) {
+                    stmt.execute(s);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao gerar tabelas:" + e.getMessage());
+        }
     }
 }
